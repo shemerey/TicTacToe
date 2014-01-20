@@ -14,7 +14,7 @@ original behaviour still here. Each commit, is a litle step forward to new code
 structure with old behavior
 
 <!--- {{{ -->
-### 1 Step, (Setup)
+### 1 Step (Setup)
 
 Setup environment:
 
@@ -25,6 +25,8 @@ Setup environment:
     * keep `.cadre/coverage.vim` under git controll, it alows to build coveradge report in
       future, for each commit.
   * update README file, add vim `modeline` to manage steps description
+* Write first isolated test
+  * capture STDOUT and match result
 
 Current Gemfile looks like:
 
