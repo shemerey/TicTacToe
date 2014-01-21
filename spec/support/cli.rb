@@ -1,3 +1,13 @@
+class UserInput
+  def initialize(commands = nil)
+    @commands = Array(commands)
+  end
+
+  def chomp
+    @commands.shift || 'exit'
+  end
+end
+
 def capture(type = :stdout, &block)
   original_stdout, original_stderr = $stdout, $stderr
   $stdout = fake_out = StringIO.new
