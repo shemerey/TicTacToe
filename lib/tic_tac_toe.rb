@@ -3,19 +3,18 @@ require "color_text"
 class TicTacToe
   attr_reader :cpu_object, :user_object
 
-  User = Struct.new(:sign, :name, :score) do
+  User = Struct.new(:name, :sign, :score) do
     def score
       @score ||= 0
     end
   end
 
   def initialize
-    @user_object, @cpu_object = User.new, User.new
+    @user_object, @cpu_object = User.new(gets.chomp), User.new('Ruby')
     #map of all places that are possible wins
     greeting
 
     cpu_object.sign, user_object.sign = rand() > 0.5 ? %w[X O] : %w[O X]
-    cpu_object.name, user_object.name = "Ruby", gets.chomp
 
     put_bar
 
