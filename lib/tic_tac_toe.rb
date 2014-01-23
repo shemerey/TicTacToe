@@ -10,17 +10,13 @@ class TicTacToe
   end
 
   def initialize
-    @user_object, @cpu_object = User.new(gets.chomp), User.new('Ruby')
-    #map of all places that are possible wins
     greeting
 
-    cpu_object.sign, user_object.sign = rand() > 0.5 ? %w[X O] : %w[O X]
+    @user_object, @cpu_object = User.new(gets.chomp, signs.last), User.new('Ruby', signs.first)
 
     put_bar
-
     start_game(user_object.sign == 'X')
   end
-
   def start_game(user_goes_first)
     if user_goes_first
       user_turn
@@ -232,6 +228,10 @@ class TicTacToe
   end
 
   private
+
+    def signs
+      @signs ||= rand() > 0.5 ? %w[X O] : %w[O X]
+    end
 
     def board
       #the tic tac toe slots
