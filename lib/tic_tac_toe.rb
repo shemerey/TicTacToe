@@ -10,6 +10,15 @@ class TicTacToe
   end
 
   class Board < Hash
+
+    def height
+      3
+    end
+
+    def width
+      3
+    end
+
     def draw(alice, bob)
       puts ""
       puts " Wins: #{alice.name}:#{alice.score} #{bob.name}:#{bob.score}".gray
