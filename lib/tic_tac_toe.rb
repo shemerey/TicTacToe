@@ -17,6 +17,7 @@ class TicTacToe
     put_bar
     start_game(user_object.sign == 'X')
   end
+
   def start_game(user_goes_first)
     if user_goes_first
       user_turn
@@ -28,31 +29,6 @@ class TicTacToe
   def restart_game(user_goes_first)
     (1...20).each { |i| put_line }
     start_game(user_goes_first)
-  end
-
-  def put_line
-    puts ("-" * 80).gray
-  end
-
-  def put_bar
-    puts ("#" * 80).gray
-    puts ("#" * 80).gray
-  end
-
-  def draw_game
-    puts ""
-    puts " Wins: #{cpu_object.name}:#{cpu_object.score} #{user_object.name}:#{user_object.score}".gray
-    puts ""
-    puts " #{cpu_object.name}: #{cpu_object.sign.green}"
-    puts " #{user_object.name}: #{user_object.sign.green}"
-    puts ""
-    puts "     a   b   c".gray
-    puts ""
-    puts " 1   #{board[:a1].green} | #{board[:b1].green} | #{board[:c1].green} ".gray
-    puts "    --- --- ---"
-    puts " 2   #{board[:a2].green} | #{board[:b2].green} | #{board[:c2].green} ".gray
-    puts "    --- --- ---"
-    puts " 3   #{board[:a3].green} | #{board[:b3].green} | #{board[:c3].green} ".gray
   end
 
   def cpu_turn
@@ -264,6 +240,30 @@ class TicTacToe
       STDOUT.flush
     end
 
+    def put_line
+      puts ("-" * 80).gray
+    end
+
+    def put_bar
+      puts ("#" * 80).gray
+      puts ("#" * 80).gray
+    end
+
+    def draw_game
+      puts ""
+      puts " Wins: #{cpu_object.name}:#{cpu_object.score} #{user_object.name}:#{user_object.score}".gray
+      puts ""
+      puts " #{cpu_object.name}: #{cpu_object.sign.green}"
+      puts " #{user_object.name}: #{user_object.sign.green}"
+      puts ""
+      puts "     a   b   c".gray
+      puts ""
+      puts " 1   #{board[:a1].green} | #{board[:b1].green} | #{board[:c1].green} ".gray
+      puts "    --- --- ---"
+      puts " 2   #{board[:a2].green} | #{board[:b2].green} | #{board[:c2].green} ".gray
+      puts "    --- --- ---"
+      puts " 3   #{board[:a3].green} | #{board[:b3].green} | #{board[:c3].green} ".gray
+    end
 end
 
   if __FILE__ == $PROGRAM_NAME
