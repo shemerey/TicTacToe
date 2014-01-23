@@ -16,13 +16,6 @@ class TicTacToe
   end
 
   def start_game(user_goes_first)
-    #the tic tac toe slots
-    @places = {
-      a1:" ",a2:" ",a3:" ",
-      b1:" ",b2:" ",b3:" ",
-      c1:" ",c2:" ",c3:" "
-    }
-
     if user_goes_first
       user_turn
     else
@@ -53,16 +46,16 @@ class TicTacToe
     puts ""
     puts "     a   b   c".gray
     puts ""
-    puts " 1   #{@places[:a1].green} | #{@places[:b1].green} | #{@places[:c1].green} ".gray
+    puts " 1   #{board[:a1].green} | #{board[:b1].green} | #{board[:c1].green} ".gray
     puts "    --- --- ---"
-    puts " 2   #{@places[:a2].green} | #{@places[:b2].green} | #{@places[:c2].green} ".gray
+    puts " 2   #{board[:a2].green} | #{board[:b2].green} | #{board[:c2].green} ".gray
     puts "    --- --- ---"
-    puts " 3   #{@places[:a3].green} | #{@places[:b3].green} | #{@places[:c3].green} ".gray
+    puts " 3   #{board[:a3].green} | #{board[:b3].green} | #{board[:c3].green} ".gray
   end
 
   def cpu_turn
     move = cpu_find_move
-    @places[move] = @cpu
+    board[move] = @cpu
     put_line
     puts " #{@cpu_name} marks #{move.to_s.upcase.green}".neon
     check_game(@user)
@@ -94,21 +87,21 @@ class TicTacToe
     end
 
     #no strategic spot found so just find a random empty
-    k = @places.keys;
+    k = board.keys;
     i = rand(k.length)
-    if @places[k[i]] == " "
+    if board[k[i]] == " "
       return k[i]
     else
       #random selection is taken so just find the first empty slot
-      @places.each { |k,v| return k if v == " " }
+      board.each { |k,v| return k if v == " " }
     end
   end
 
   def times_in_column arr, item
     times = 0
     arr.each do |i|
-      times += 1 if @places[i] == item
-      unless @places[i] == item || @places[i] == " "
+      times += 1 if board[i] == item
+      unless board[i] == item || board[i] == " "
         #oppisite piece is in column so column cannot be used for win.
         #therefore, the strategic thing to do is choose a dif column so return 0.
         return 0
@@ -119,7 +112,7 @@ class TicTacToe
 
   def empty_in_column arr
     arr.each do |i|
-      if @places[i] == " "
+      if board[i] == " "
         return i
       end
     end
@@ -137,8 +130,8 @@ class TicTacToe
       a = input.to_s.split("")
       if(['a','b','c'].include? a[0])
         if(['1','2','3'].include? a[1])
-          if @places[input] == " "
-            @places[input] = @user
+          if board[input] == " "
+            board[input] = @user
             put_line
             puts " #{@user_name} marks #{input.to_s.upcase.green}".neon
             check_game(@cpu)
@@ -169,7 +162,7 @@ class TicTacToe
   end
 
   def moves_left
-    @places.values.select{ |v| v == " " }.length
+    board.values.select{ |v| v == " " }.length
   end
 
   def check_game(next_turn)
@@ -233,6 +226,15 @@ class TicTacToe
   end
 
   private
+
+    def board
+      #the tic tac toe slots
+      @places ||= {
+        a1:" ",a2:" ",a3:" ",
+        b1:" ",b2:" ",b3:" ",
+        c1:" ",c2:" ",c3:" "
+      }
+    end
 
     def columns
       @columns ||= [
