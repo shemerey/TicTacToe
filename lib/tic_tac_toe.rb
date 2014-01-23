@@ -10,7 +10,7 @@ class TicTacToe
     greeting
 
     cpu_object.sign, @user = rand() > 0.5 ? %w[X O] : %w[O X]
-    @cpu_name, @user_name = "Ruby", gets.chomp
+    cpu_object.name, @user_name = "Ruby", gets.chomp
     @cpu_score, @user_score = 0, 0
 
     put_bar
@@ -42,9 +42,9 @@ class TicTacToe
 
   def draw_game
     puts ""
-    puts " Wins: #{@cpu_name}:#{@cpu_score} #{@user_name}:#{@user_score}".gray
+    puts " Wins: #{cpu_object.name}:#{@cpu_score} #{@user_name}:#{@user_score}".gray
     puts ""
-    puts " #{@cpu_name}: #{cpu_object.sign.green}"
+    puts " #{cpu_object.name}: #{cpu_object.sign.green}"
     puts " #{@user_name}: #{@user.green}"
     puts ""
     puts "     a   b   c".gray
@@ -60,7 +60,7 @@ class TicTacToe
     move = cpu_find_move
     board[move] = cpu_object.sign
     put_line
-    puts " #{@cpu_name} marks #{move.to_s.upcase.green}".neon
+    puts " #{cpu_object.name} marks #{move.to_s.upcase.green}".neon
     check_game(@user)
   end
 
@@ -179,7 +179,7 @@ class TicTacToe
         draw_game
         put_line
         puts ""
-        puts " Game Over -- #{@cpu_name} WINS!!!\n".blue
+        puts " Game Over -- #{cpu_object.name} WINS!!!\n".blue
         game_over = true
         @cpu_score += 1
         ask_to_play_again(false)
