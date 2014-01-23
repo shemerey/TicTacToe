@@ -9,13 +9,13 @@ class TicTacToe
     #map of all places that are possible wins
     greeting
 
-    cpu_object.sign, @user = rand() > 0.5 ? %w[X O] : %w[O X]
+    cpu_object.sign, user_object.sign = rand() > 0.5 ? %w[X O] : %w[O X]
     cpu_object.name, @user_name = "Ruby", gets.chomp
     cpu_object.score, @user_score = 0, 0
 
     put_bar
 
-    start_game(@user == 'X')
+    start_game(user_object.sign == 'X')
   end
 
   def start_game(user_goes_first)
@@ -45,7 +45,7 @@ class TicTacToe
     puts " Wins: #{cpu_object.name}:#{cpu_object.score} #{@user_name}:#{@user_score}".gray
     puts ""
     puts " #{cpu_object.name}: #{cpu_object.sign.green}"
-    puts " #{@user_name}: #{@user.green}"
+    puts " #{@user_name}: #{user_object.sign.green}"
     puts ""
     puts "     a   b   c".gray
     puts ""
@@ -61,7 +61,7 @@ class TicTacToe
     board[move] = cpu_object.sign
     put_line
     puts " #{cpu_object.name} marks #{move.to_s.upcase.green}".neon
-    check_game(@user)
+    check_game(user_object.sign)
   end
 
   def cpu_find_move
@@ -77,7 +77,7 @@ class TicTacToe
     # see if user can win
     #see if any winning_sequence already have 2 (user)
     winning_sequence.each do |column|
-      if times_in_column(column, @user) == 2
+      if times_in_column(column, user_object.sign) == 2
         return empty_in_column column
       end
     end
@@ -134,7 +134,7 @@ class TicTacToe
       if(['a','b','c'].include? a[0])
         if(['1','2','3'].include? a[1])
           if board[input] == " "
-            board[input] = @user
+            board[input] = user_object.sign
             put_line
             puts " #{@user_name} marks #{input.to_s.upcase.green}".neon
             check_game(cpu_object.sign)
@@ -185,7 +185,7 @@ class TicTacToe
         ask_to_play_again(false)
       end
       # see if user has won
-      if times_in_column(column, @user) == 3
+      if times_in_column(column, user_object.sign) == 3
         put_line
         draw_game
         put_line
@@ -199,7 +199,7 @@ class TicTacToe
 
     unless game_over
       if(moves_left > 0)
-        if(next_turn == @user)
+        if(next_turn == user_object.sign)
           user_turn
         else
           cpu_turn
