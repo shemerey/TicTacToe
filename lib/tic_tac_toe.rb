@@ -10,7 +10,7 @@ class TicTacToe
     greeting
 
     cpu_object.sign, user_object.sign = rand() > 0.5 ? %w[X O] : %w[O X]
-    cpu_object.name, @user_name = "Ruby", gets.chomp
+    cpu_object.name, user_object.name = "Ruby", gets.chomp
     cpu_object.score, @user_score = 0, 0
 
     put_bar
@@ -42,10 +42,10 @@ class TicTacToe
 
   def draw_game
     puts ""
-    puts " Wins: #{cpu_object.name}:#{cpu_object.score} #{@user_name}:#{@user_score}".gray
+    puts " Wins: #{cpu_object.name}:#{cpu_object.score} #{user_object.name}:#{@user_score}".gray
     puts ""
     puts " #{cpu_object.name}: #{cpu_object.sign.green}"
-    puts " #{@user_name}: #{user_object.sign.green}"
+    puts " #{user_object.name}: #{user_object.sign.green}"
     puts ""
     puts "     a   b   c".gray
     puts ""
@@ -125,7 +125,7 @@ class TicTacToe
     put_line
     puts "\n  RUBY TIC TAC TOE".purple
     draw_game
-    print "\n #{@user_name}, please make a move or type 'exit' to quit: ".neon
+    print "\n #{user_object.name}, please make a move or type 'exit' to quit: ".neon
     STDOUT.flush
     input = gets.chomp.downcase.to_sym
     put_bar
@@ -136,7 +136,7 @@ class TicTacToe
           if board[input] == " "
             board[input] = user_object.sign
             put_line
-            puts " #{@user_name} marks #{input.to_s.upcase.green}".neon
+            puts " #{user_object.name} marks #{input.to_s.upcase.green}".neon
             check_game(cpu_object.sign)
           else
             wrong_move
@@ -190,7 +190,7 @@ class TicTacToe
         draw_game
         put_line
         puts ""
-        puts " Game Over -- #{@user_name} WINS!!!\n".blue
+        puts " Game Over -- #{user_object.name} WINS!!!\n".blue
         game_over = true
         @user_score += 1
         ask_to_play_again(true)
