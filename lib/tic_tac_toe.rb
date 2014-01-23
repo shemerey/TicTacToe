@@ -1,12 +1,15 @@
 require "color_text"
 
 class TicTacToe
+  attr_reader :cpu_object, :user_object
+  User = Struct.new(:sign, :name)
 
   def initialize
+    @user_object, @cpu_object = User.new, User.new
     #map of all places that are possible wins
     greeting
 
-    @cpu, @user = rand() > 0.5 ? %w[X O] : %w[O X]
+    cpu_object.sign, @user = rand() > 0.5 ? %w[X O] : %w[O X]
     @cpu_name, @user_name = "Ruby", gets.chomp
     @cpu_score, @user_score = 0, 0
 
@@ -41,7 +44,7 @@ class TicTacToe
     puts ""
     puts " Wins: #{@cpu_name}:#{@cpu_score} #{@user_name}:#{@user_score}".gray
     puts ""
-    puts " #{@cpu_name}: #{@cpu.green}"
+    puts " #{@cpu_name}: #{cpu_object.sign.green}"
     puts " #{@user_name}: #{@user.green}"
     puts ""
     puts "     a   b   c".gray
@@ -55,7 +58,7 @@ class TicTacToe
 
   def cpu_turn
     move = cpu_find_move
-    board[move] = @cpu
+    board[move] = cpu_object.sign
     put_line
     puts " #{@cpu_name} marks #{move.to_s.upcase.green}".neon
     check_game(@user)
@@ -66,7 +69,7 @@ class TicTacToe
     # see if cpu can win
     #see if any winning_sequence already have 2 (cpu)
     winning_sequence.each do |column|
-      if times_in_column(column, @cpu) == 2
+      if times_in_column(column, cpu_object.sign) == 2
         return empty_in_column column
       end
     end
@@ -81,7 +84,7 @@ class TicTacToe
 
     #see if any winning_sequence aready have 1 (cpu)
     winning_sequence.each do |column|
-      if times_in_column(column, @cpu) == 1
+      if times_in_column(column, cpu_object.sign) == 1
         return empty_in_column column
       end
     end
@@ -134,7 +137,7 @@ class TicTacToe
             board[input] = @user
             put_line
             puts " #{@user_name} marks #{input.to_s.upcase.green}".neon
-            check_game(@cpu)
+            check_game(cpu_object.sign)
           else
             wrong_move
           end
@@ -171,7 +174,7 @@ class TicTacToe
 
     winning_sequence.each do |column|
       # see if cpu has won
-      if times_in_column(column, @cpu) == 3
+      if times_in_column(column, cpu_object.sign) == 3
         put_line
         draw_game
         put_line
