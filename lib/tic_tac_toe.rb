@@ -4,32 +4,13 @@ class TicTacToe
 
   def initialize
     #map of all places that are possible wins
-    @columns = [
-      [:a1,:a2,:a3],
-      [:b1,:b2,:b3],
-      [:c1,:c2,:c3],
+    greeting
 
-      [:a1,:b1,:c1],
-      [:a2,:b2,:c2],
-      [:a3,:b3,:c3],
+    @cpu, @user = rand() > 0.5 ? %w[X O] : %w[O X]
+    @cpu_name, @user_name = "Ruby", gets.chomp
+    @cpu_score, @user_score = 0, 0
 
-      [:a1,:b2,:c3],
-      [:c1,:b2,:a3]
-    ]
-
-    @cpu = rand() > 0.5 ? 'X' : 'O'
-    @user = @cpu == 'X' ? 'O' : 'X'
-
-    @cpu_name = "Ruby"
-    put_line
-    puts "\n  RUBY TIC TAC TOE".purple
-    print "\n What is your name? ".neon
-    STDOUT.flush
-    @user_name = gets.chomp
     put_bar
-
-    @user_score = 0
-    @cpu_score = 0
 
     start_game(@user == 'X')
   end
@@ -91,7 +72,7 @@ class TicTacToe
 
     # see if cpu can win
     #see if any columns already have 2 (cpu)
-    @columns.each do |column|
+    columns.each do |column|
       if times_in_column(column, @cpu) == 2
         return empty_in_column column
       end
@@ -99,14 +80,14 @@ class TicTacToe
 
     # see if user can win
     #see if any columns already have 2 (user)
-    @columns.each do |column|
+    columns.each do |column|
       if times_in_column(column, @user) == 2
         return empty_in_column column
       end
     end
 
     #see if any columns aready have 1 (cpu)
-    @columns.each do |column|
+    columns.each do |column|
       if times_in_column(column, @cpu) == 1
         return empty_in_column column
       end
@@ -195,7 +176,7 @@ class TicTacToe
 
     game_over = nil
 
-    @columns.each do |column|
+    columns.each do |column|
       # see if cpu has won
       if times_in_column(column, @cpu) == 3
         put_line
@@ -250,6 +231,30 @@ class TicTacToe
     else ask_to_play_again(user_goes_first)
     end
   end
+
+  private
+
+    def columns
+      @columns ||= [
+        [:a1,:a2,:a3],
+        [:b1,:b2,:b3],
+        [:c1,:c2,:c3],
+
+        [:a1,:b1,:c1],
+        [:a2,:b2,:c2],
+        [:a3,:b3,:c3],
+
+        [:a1,:b2,:c3],
+        [:c1,:b2,:a3]
+      ]
+    end
+
+    def greeting
+      put_line
+      puts "\n  RUBY TIC TAC TOE".purple
+      print "\n What is your name? ".neon
+      STDOUT.flush
+    end
 
 end
 
