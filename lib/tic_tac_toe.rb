@@ -2,7 +2,7 @@ require "color_text"
 
 class TicTacToe
   attr_reader :cpu_object, :user_object
-  User = Struct.new(:sign, :name)
+  User = Struct.new(:sign, :name, :score)
 
   def initialize
     @user_object, @cpu_object = User.new, User.new
@@ -11,7 +11,7 @@ class TicTacToe
 
     cpu_object.sign, @user = rand() > 0.5 ? %w[X O] : %w[O X]
     cpu_object.name, @user_name = "Ruby", gets.chomp
-    @cpu_score, @user_score = 0, 0
+    cpu_object.score, @user_score = 0, 0
 
     put_bar
 
@@ -42,7 +42,7 @@ class TicTacToe
 
   def draw_game
     puts ""
-    puts " Wins: #{cpu_object.name}:#{@cpu_score} #{@user_name}:#{@user_score}".gray
+    puts " Wins: #{cpu_object.name}:#{cpu_object.score} #{@user_name}:#{@user_score}".gray
     puts ""
     puts " #{cpu_object.name}: #{cpu_object.sign.green}"
     puts " #{@user_name}: #{@user.green}"
@@ -181,7 +181,7 @@ class TicTacToe
         puts ""
         puts " Game Over -- #{cpu_object.name} WINS!!!\n".blue
         game_over = true
-        @cpu_score += 1
+        cpu_object.score += 1
         ask_to_play_again(false)
       end
       # see if user has won
