@@ -45,3 +45,8 @@ describe TicTacToe::User do
     subject.score.should be_zero
   end
 end
+
+describe TicTacToe::Board do
+  it { should be_empty }
+  it { should respond_to(:draw) }
+end

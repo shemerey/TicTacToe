@@ -10,7 +10,21 @@ class TicTacToe
   end
 
   class Board < Hash
-
+    def draw(alice, bob)
+      puts ""
+      puts " Wins: #{alice.name}:#{alice.score} #{bob.name}:#{bob.score}".gray
+      puts ""
+      puts " #{alice.name}: #{alice.sign.green}"
+      puts " #{bob.name}: #{bob.sign.green}"
+      puts ""
+      puts "     a   b   c".gray
+      puts ""
+      puts " 1   #{self[:a1].green} | #{self[:b1].green} | #{self[:c1].green} ".gray
+      puts "    --- --- ---"
+      puts " 2   #{self[:a2].green} | #{self[:b2].green} | #{self[:c2].green} ".gray
+      puts "    --- --- ---"
+      puts " 3   #{self[:a3].green} | #{self[:b3].green} | #{self[:c3].green} ".gray
+    end
   end
 
   def initialize
@@ -255,19 +269,7 @@ class TicTacToe
     end
 
     def draw_game
-      puts ""
-      puts " Wins: #{cpu_object.name}:#{cpu_object.score} #{user_object.name}:#{user_object.score}".gray
-      puts ""
-      puts " #{cpu_object.name}: #{cpu_object.sign.green}"
-      puts " #{user_object.name}: #{user_object.sign.green}"
-      puts ""
-      puts "     a   b   c".gray
-      puts ""
-      puts " 1   #{board[:a1].green} | #{board[:b1].green} | #{board[:c1].green} ".gray
-      puts "    --- --- ---"
-      puts " 2   #{board[:a2].green} | #{board[:b2].green} | #{board[:c2].green} ".gray
-      puts "    --- --- ---"
-      puts " 3   #{board[:a3].green} | #{board[:b3].green} | #{board[:c3].green} ".gray
+      board.draw(user_object, cpu_object)
     end
 end
 
