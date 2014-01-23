@@ -64,23 +64,23 @@ class TicTacToe
   def cpu_find_move
 
     # see if cpu can win
-    #see if any columns already have 2 (cpu)
-    columns.each do |column|
+    #see if any winning_sequence already have 2 (cpu)
+    winning_sequence.each do |column|
       if times_in_column(column, @cpu) == 2
         return empty_in_column column
       end
     end
 
     # see if user can win
-    #see if any columns already have 2 (user)
-    columns.each do |column|
+    #see if any winning_sequence already have 2 (user)
+    winning_sequence.each do |column|
       if times_in_column(column, @user) == 2
         return empty_in_column column
       end
     end
 
-    #see if any columns aready have 1 (cpu)
-    columns.each do |column|
+    #see if any winning_sequence aready have 1 (cpu)
+    winning_sequence.each do |column|
       if times_in_column(column, @cpu) == 1
         return empty_in_column column
       end
@@ -169,7 +169,7 @@ class TicTacToe
 
     game_over = nil
 
-    columns.each do |column|
+    winning_sequence.each do |column|
       # see if cpu has won
       if times_in_column(column, @cpu) == 3
         put_line
@@ -236,8 +236,8 @@ class TicTacToe
       }
     end
 
-    def columns
-      @columns ||= [
+    def winning_sequence
+      @winning_sequence ||= [
         [:a1,:a2,:a3],
         [:b1,:b2,:b3],
         [:c1,:c2,:c3],
