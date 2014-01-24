@@ -16,7 +16,7 @@ class TicTacToe
 
     greeting
 
-    @user_object, @cpu_object = User.new(gets.chomp, signs.last), User.new('Ruby', signs.first)
+    @user_object, @cpu_object = User.new(gets.chomp, signs.last, 0, board), User.new('Ruby', signs.first, 0, board)
 
     put_bar
     start_game(user_object.sign == 'X')
@@ -44,39 +44,7 @@ class TicTacToe
   end
 
   def cpu_find_move
-
-    # see if cpu can win
-    #see if any winning_sequence already have 2 (cpu)
-    board.wining_sequence.each do |column|
-      if times_in_column(column, cpu_object.sign) == 2
-        return empty_in_column column
-      end
-    end
-
-    # see if user can win
-    #see if any winning_sequence already have 2 (user)
-    board.wining_sequence.each do |column|
-      if times_in_column(column, user_object.sign) == 2
-        return empty_in_column column
-      end
-    end
-
-    #see if any winning_sequence aready have 1 (cpu)
-    board.wining_sequence.each do |column|
-      if times_in_column(column, cpu_object.sign) == 1
-        return empty_in_column column
-      end
-    end
-
-    #no strategic spot found so just find a random empty
-    k = board.keys;
-    i = rand(k.length)
-    if board[k[i]].empty?
-      return k[i]
-    else
-      #random selection is taken so just find the first empty slot
-      board.each { |k,v| return k if v.empty? }
-    end
+    cpu_object.find_move
   end
 
   def times_in_column arr, item
@@ -90,14 +58,6 @@ class TicTacToe
       end
     end
     times
-  end
-
-  def empty_in_column arr
-    arr.each do |i|
-      if board[i].empty?
-        return i
-      end
-    end
   end
 
   def user_turn
