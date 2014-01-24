@@ -51,7 +51,11 @@ class TicTacToe::Board
   end
 
   def game_over?
-    full? || signs.any?{|sign| sign_win?(sign) }
+    full? || signs.any?{ |sign| sign_win?(sign) }
+  end
+
+  def draw?
+    signs.all?{ |sign| full? && (not sign_win?(sign)) }
   end
 
   def sign_win?(sign)

@@ -41,6 +41,32 @@ describe TicTacToe::Board do
     end
   end
 
+  context '#draw?' do
+    let(:draw_game) do
+      subject[:a1], subject[:a2], subject[:a3] = 'X', 'X', 'O'
+      subject[:b1], subject[:b2], subject[:b3] = 'O', 'O', 'X'
+      subject[:c1], subject[:c2], subject[:c3] = 'X', 'X', 'O'
+      subject
+    end
+
+    it 'should be full and no one should win' do
+      draw_game.sign_win?('O').should_not be_true
+      draw_game.sign_win?('X').should_not be_true
+      draw_game.should be_full
+      draw_game.should be_draw
+    end
+
+    it 'should not be draw if it some one win' do
+      draw_game.stub(:sign_win?).and_return(true)
+      draw_game.should_not be_draw
+    end
+
+    it 'should not be draw if it is not full' do
+      draw_game.stub(:full?).and_return(false)
+      draw_game.should_not be_draw
+    end
+  end
+
   context '#game_over?' do
     it 'should not be game over by default' do
       subject.should_not be_game_over
