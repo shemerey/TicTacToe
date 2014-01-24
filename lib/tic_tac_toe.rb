@@ -104,11 +104,17 @@ class TicTacToe
     draw_game
     print "\n #{user_object.name}, please make a move or type 'exit' to quit: ".neon
     STDOUT.flush
-    input = gets.chomp.downcase.to_sym
+
+    input = gets.chomp.downcase
+    return wrong_input unless (user_input = UserInput.new(input)).valid?
+
+    input = input.to_sym
     put_bar
-    if input.length == 2
+
+    if user_input.turn?
       a = input.to_s.split("")
       if (['a','b','c'].include? a[0]) && (['1','2','3'].include? a[1])
+
         if board[input] == " "
           board[input] = user_object.sign
           put_line
@@ -120,8 +126,6 @@ class TicTacToe
       else
         wrong_input
       end
-    else
-      wrong_input unless input == :exit
     end
   end
 
