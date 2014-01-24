@@ -71,11 +71,11 @@ class TicTacToe
     #no strategic spot found so just find a random empty
     k = board.keys;
     i = rand(k.length)
-    if board[k[i]] == " "
+    if board[k[i]].empty?
       return k[i]
     else
       #random selection is taken so just find the first empty slot
-      board.each { |k,v| return k if v == " " }
+      board.each { |k,v| return k if v.empty? }
     end
   end
 
@@ -83,7 +83,7 @@ class TicTacToe
     times = 0
     arr.each do |i|
       times += 1 if board[i] == item
-      unless board[i] == item || board[i] == " "
+      unless board[i] == item || board[i].empty?
         #oppisite piece is in column so column cannot be used for win.
         #therefore, the strategic thing to do is choose a dif column so return 0.
         return 0
@@ -94,7 +94,7 @@ class TicTacToe
 
   def empty_in_column arr
     arr.each do |i|
-      if board[i] == " "
+      if board[i].empty?
         return i
       end
     end
@@ -114,7 +114,7 @@ class TicTacToe
     put_bar
 
     if user_input.turn?
-      if board[user_input.turn] == " "
+      if board[user_input.turn].empty?
         board[user_input.turn] = user_object.sign
         put_line
         puts " #{user_object.name} marks #{input.to_s.upcase.green}".neon
@@ -138,7 +138,7 @@ class TicTacToe
   end
 
   def moves_left
-    board.values.select{ |v| v == " " }.length
+    board.values.select{ |v| v.empty? }.length
   end
 
   def check_game(next_turn)

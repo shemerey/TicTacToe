@@ -1,13 +1,13 @@
 class TicTacToe::Board < Hash
   extend Forwardable
 
-  def_delegators :@board, :size, :<<, :map, :each, :keys, :values, :[], :[]=
+  def_delegators :@board, :size, :<<, :map, :each, :keys, :values, :[]=
 
   def initialize(*)
     @board = {
-      :a1 => ' ', :a2 => ' ', :a3 => ' ',
-      :b1 => ' ', :b2 => ' ', :b3 => ' ',
-      :c1 => ' ', :c2 => ' ', :c3 => ' ',
+      :a1 => '', :a2 => '', :a3 => '',
+      :b1 => '', :b2 => '', :b3 => '',
+      :c1 => '', :c2 => '', :c3 => '',
     }
     super
   end
@@ -18,6 +18,10 @@ class TicTacToe::Board < Hash
 
   def width
     3
+  end
+
+  def [](key)
+    @board.fetch(key) { '' }
   end
 
   def ==(other)
