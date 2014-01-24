@@ -47,6 +47,21 @@ describe TicTacToe::Board do
     end
   end
 
+  context '#full?' do
+    it { should_not be_full }
+    it ' should not be full if not all cells filled' do
+      subject[:a1] = 'X'
+      subject.should_not be_full
+    end
+
+    it 'full if all cells filled' do
+      subject[:a1], subject[:a2], subject[:a3] = 'X', 'X', 'X'
+      subject[:b1], subject[:b2], subject[:b3] = 'X', 'X', 'X'
+      subject[:c1], subject[:c2], subject[:c3] = 'X', 'X', 'X'
+      subject.should be_full
+    end
+  end
+
   context 'default cell should be empty' do
     it '#empty?' do
       subject[:b2].should be_empty

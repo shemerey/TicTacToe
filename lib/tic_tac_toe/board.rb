@@ -31,6 +31,10 @@ class TicTacToe::Board
     values.all?(&:empty?)
   end
 
+  def full?
+    values.all? {|v| not v.empty? }
+  end
+
   def wining_sequence
     @winning_sequence ||= [
       [:a1,:a2,:a3],
