@@ -107,21 +107,16 @@ class TicTacToe
     print "\n #{user_object.name}, please make a move or type 'exit' to quit: ".neon
     STDOUT.flush
 
-    input = gets.chomp.downcase
-    return wrong_input unless (user_input = UserInput.new(input)).valid?
+    return wrong_input unless (user_input = UserInput.new(gets.chomp.downcase)).valid?
 
-    input = input.to_sym
     put_bar
 
     if user_input.turn?
-      if board[user_input.turn].empty?
-        board[user_input.turn] = user_object.sign
-        put_line
-        puts " #{user_object.name} marks #{input.to_s.upcase.green}".neon
-        check_game(cpu_object.sign)
-      else
-        wrong_move
-      end
+      return wrong_move unless board[user_input.turn].empty?
+      board[user_input.turn] = user_object.sign
+      put_line
+      puts " #{user_object.name} marks #{user_input.turn.to_s.upcase.green}".neon
+      check_game(cpu_object.sign)
     end
   end
 
