@@ -94,7 +94,6 @@ class TicTacToe
     board.wining_sequence.each do |column|
       # see if cpu has won
       if times_in_column(column, cpu_object.sign) == 3
-        put_line
         draw_game
         win_message(cpu_object)
         game_over = true
@@ -103,7 +102,6 @@ class TicTacToe
       end
       # see if user has won
       if times_in_column(column, user_object.sign) == 3
-        put_line
         draw_game
         win_message(user_object)
         game_over = true
@@ -120,7 +118,6 @@ class TicTacToe
           cpu_turn
         end
       else
-        put_line
         draw_game
         put_line
         puts ""
@@ -176,6 +173,7 @@ class TicTacToe
     end
 
     def draw_game
+      put_line
       puts ""
       puts " Wins: #{user_object.name}:#{user_object.score} #{cpu_object.name}:#{cpu_object.score}".gray
       puts ""
