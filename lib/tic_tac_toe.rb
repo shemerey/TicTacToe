@@ -95,18 +95,17 @@ class TicTacToe
       # see if cpu has won
       if times_in_column(column, cpu_object.sign) == 3
         draw_game
-        win_message(cpu_object)
         game_over = true
         cpu_object.score += 1
-        ask_to_play_again(false)
+        finish(win_message(cpu_object))
       end
+
       # see if user has won
       if times_in_column(column, user_object.sign) == 3
         draw_game
-        win_message(user_object)
         game_over = true
         user_object.score += 1
-        ask_to_play_again(true)
+        finish(win_message(user_object))
       end
     end
 
@@ -118,13 +117,13 @@ class TicTacToe
           cpu_turn
         end
       else
-        draw_game
-        put_line
-        puts ""
-        puts " Game Over -- DRAW!\n".blue
-        ask_to_play_again(rand() > 0.5)
+        finish(draw_message)
       end
     end
+  end
+
+  def finish(message)
+    message && ask_to_play_again(rand() > 0.5)
   end
 
   def ask_to_play_again(user_goes_first)
@@ -164,6 +163,13 @@ class TicTacToe
 
     def clean
       (1...20).each { |i| put_line }
+    end
+
+    def draw_message
+      draw_game
+      put_line
+      puts ""
+      puts " Game Over -- DRAW!\n".blue
     end
 
     def win_message(user)

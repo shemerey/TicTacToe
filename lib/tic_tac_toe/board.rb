@@ -54,7 +54,7 @@ class TicTacToe::Board
     full? || signs.any?{ |sign| sign_win?(sign) }
   end
 
-  def draw?
+  def game_draw?
     signs.all?{ |sign| full? && (not sign_win?(sign)) }
   end
 

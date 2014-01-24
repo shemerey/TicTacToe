@@ -41,7 +41,7 @@ describe TicTacToe::Board do
     end
   end
 
-  context '#draw?' do
+  context '#game_draw?' do
     let(:draw_game) do
       subject[:a1], subject[:a2], subject[:a3] = 'X', 'X', 'O'
       subject[:b1], subject[:b2], subject[:b3] = 'O', 'O', 'X'
@@ -53,17 +53,17 @@ describe TicTacToe::Board do
       draw_game.sign_win?('O').should_not be_true
       draw_game.sign_win?('X').should_not be_true
       draw_game.should be_full
-      draw_game.should be_draw
+      draw_game.should be_game_draw
     end
 
     it 'should not be draw if it some one win' do
       draw_game.stub(:sign_win?).and_return(true)
-      draw_game.should_not be_draw
+      draw_game.should_not be_game_draw
     end
 
     it 'should not be draw if it is not full' do
       draw_game.stub(:full?).and_return(false)
-      draw_game.should_not be_draw
+      draw_game.should_not be_game_draw
     end
   end
 
