@@ -42,19 +42,6 @@ class TicTacToe
     check_game(user_object.sign)
   end
 
-  def times_in_column arr, item
-    times = 0
-    arr.each do |i|
-      times += 1 if board[i] == item
-      unless board[i] == item || board[i].empty?
-        #oppisite piece is in column so column cannot be used for win.
-        #therefore, the strategic thing to do is choose a dif column so return 0.
-        return 0
-      end
-    end
-    times
-  end
-
   def user_turn
     put_line
     puts "\n  RUBY TIC TAC TOE".purple
