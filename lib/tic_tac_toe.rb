@@ -132,10 +132,6 @@ class TicTacToe
     user_turn
   end
 
-  def moves_left
-    board.values.select{ |v| v.empty? }.length
-  end
-
   def check_game(next_turn)
 
     game_over = nil
@@ -166,7 +162,7 @@ class TicTacToe
     end
 
     unless game_over
-      if(moves_left > 0)
+      unless board.full?
         if(next_turn == user_object.sign)
           user_turn
         else
