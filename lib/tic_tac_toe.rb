@@ -91,35 +91,30 @@ class TicTacToe
 
     game_over = nil
 
-    board.wining_sequence.each do |column|
-      # see if cpu has won
-      if times_in_column(column, cpu_object.sign) == 3
-        draw_game
-        game_over = true
-        cpu_object.score += 1
-        finish(win_message(cpu_object))
-      end
-
-      # see if user has won
-      if times_in_column(column, user_object.sign) == 3
-        draw_game
-        game_over = true
-        user_object.score += 1
-        finish(win_message(user_object))
-      end
+    if board.sign_win?(cpu_object.sign)
+      draw_game
+      game_over = true
+      cpu_object.score += 1
+      finish(win_message(cpu_object))
     end
 
-    unless game_over
-      unless board.full?
-        if(next_turn == user_object.sign)
-          user_turn
-        else
-          cpu_turn
-        end
+    # see if user has won
+    if board.sign_win?(user_object.sign)
+      draw_game
+      game_over = true
+      user_object.score += 1
+      finish(win_message(user_object))
+    end
+
+    unless board.game_over?
+      if(next_turn == user_object.sign)
+        user_turn
       else
-        finish(draw_message)
+        cpu_turn
       end
     end
+
+    finish(draw_message) if board.game_draw?
   end
 
   def finish(message)
