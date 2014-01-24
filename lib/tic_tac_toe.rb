@@ -107,24 +107,28 @@ class TicTacToe
     finish(draw_message) if board.game_draw?
   end
 
-  def finish(message)
-    message && ask_to_play_again
-  end
-
-  def ask_to_play_again
-    print " Play again? (Yn): "
-    STDOUT.flush
-    response = gets.chomp.downcase
-    case response
-    when "y"   then restart_game
-    when "yes" then restart_game
-    when "n"   then #do nothing
-    when "no"  then #do nothing
-    else ask_to_play_again
-    end
-  end
 
   private
+
+    def finish(message)
+      message && ask_to_play_again
+    end
+
+    def ask_to_play_again
+      restart_game if paly_again?
+    end
+
+    def paly_again?
+      print " Play again? (Yn): "
+      STDOUT.flush
+      case gets.chomp.downcase
+      when "y"   then true
+      when "yes" then true
+      when "n"   then false
+      when "no"  then false
+      else paly_again?
+      end
+    end
 
     def signs
       @signs ||= rand() > 0.5 ? %w[X O] : %w[O X]
