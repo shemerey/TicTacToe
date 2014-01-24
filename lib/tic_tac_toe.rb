@@ -127,18 +127,14 @@ class TicTacToe
     put_bar
     if input.length == 2
       a = input.to_s.split("")
-      if(['a','b','c'].include? a[0])
-        if(['1','2','3'].include? a[1])
-          if board[input] == " "
-            board[input] = user_object.sign
-            put_line
-            puts " #{user_object.name} marks #{input.to_s.upcase.green}".neon
-            check_game(cpu_object.sign)
-          else
-            wrong_move
-          end
+      if (['a','b','c'].include? a[0]) && (['1','2','3'].include? a[1])
+        if board[input] == " "
+          board[input] = user_object.sign
+          put_line
+          puts " #{user_object.name} marks #{input.to_s.upcase.green}".neon
+          check_game(cpu_object.sign)
         else
-          wrong_input
+          wrong_move
         end
       else
         wrong_input

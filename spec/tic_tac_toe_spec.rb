@@ -42,6 +42,11 @@ describe TicTacToe do
       let(:input) { UserInput.new(%w[Anton aa xx nn 11 12 99 a10 b20]) }
       it { capture{ subject }.should =~ /Please specify a move with the format 'A1' , 'B3' , 'C2' etc./ }
     end
+
+    context "exit is a correct user input" do
+      let(:input) { UserInput.new(%w[Anton exit]) }
+      it { capture{ subject }.should_not =~ /Please specify a move with the format 'A1' , 'B3' , 'C2' etc./ }
+    end
   end
 end
 
