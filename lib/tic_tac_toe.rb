@@ -75,20 +75,14 @@ class TicTacToe
   end
 
   def check_game(next_turn)
-
-    game_over = nil
-
     if board.sign_win?(cpu_object.sign)
       draw_game
-      game_over = true
       cpu_object.score += 1
       finish(win_message(cpu_object))
     end
 
-    # see if user has won
     if board.sign_win?(user_object.sign)
       draw_game
-      game_over = true
       user_object.score += 1
       finish(win_message(user_object))
     end
