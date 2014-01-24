@@ -96,9 +96,7 @@ class TicTacToe
       if times_in_column(column, cpu_object.sign) == 3
         put_line
         draw_game
-        put_line
-        puts ""
-        puts " Game Over -- #{cpu_object.name} WINS!!!\n".blue
+        win_message(cpu_object)
         game_over = true
         cpu_object.score += 1
         ask_to_play_again(false)
@@ -107,9 +105,7 @@ class TicTacToe
       if times_in_column(column, user_object.sign) == 3
         put_line
         draw_game
-        put_line
-        puts ""
-        puts " Game Over -- #{user_object.name} WINS!!!\n".blue
+        win_message(user_object)
         game_over = true
         user_object.score += 1
         ask_to_play_again(true)
@@ -171,6 +167,12 @@ class TicTacToe
 
     def clean
       (1...20).each { |i| put_line }
+    end
+
+    def win_message(user)
+      put_line
+      puts ""
+      puts " Game Over -- #{user.name} WINS!!!\n".blue
     end
 
     def draw_game
