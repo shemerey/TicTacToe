@@ -31,20 +31,15 @@ class TicTacToe
   end
 
   def restart_game(user_goes_first)
-    (1...20).each { |i| put_line }
-    start_game(user_goes_first)
+    clean && start_game(user_goes_first)
   end
 
   def cpu_turn
-    move = cpu_find_move
+    move = cpu_object.find_move
     board[move] = cpu_object.sign
     put_line
     puts " #{cpu_object.name} marks #{move.to_s.upcase.green}".neon
     check_game(user_object.sign)
-  end
-
-  def cpu_find_move
-    cpu_object.find_move
   end
 
   def times_in_column arr, item
@@ -172,6 +167,10 @@ class TicTacToe
     def put_bar
       puts ("#" * 80).gray
       puts ("#" * 80).gray
+    end
+
+    def clean
+      (1...20).each { |i| put_line }
     end
 
     def draw_game
