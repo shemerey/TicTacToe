@@ -1,4 +1,4 @@
-class TicTacToe::Board < Hash
+class TicTacToe::Board
   extend Forwardable
 
   def_delegators :@board, :size, :<<, :map, :each, :keys, :values, :[]=
@@ -9,7 +9,6 @@ class TicTacToe::Board < Hash
       :b1 => '', :b2 => '', :b3 => '',
       :c1 => '', :c2 => '', :c3 => '',
     }
-    super
   end
 
   def height
@@ -28,7 +27,11 @@ class TicTacToe::Board < Hash
     @board == other
   end
 
-  def winning_sequence
+  def empty?
+    values.all?(&:empty?)
+  end
+
+  def wining_sequence
     @winning_sequence ||= [
       [:a1,:a2,:a3],
       [:b1,:b2,:b3],

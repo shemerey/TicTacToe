@@ -52,6 +52,11 @@ describe TicTacToe::Board do
       subject[:b2].should be_empty
     end
 
+    it 'should not be empty if any cell filled' do
+      subject[:a1] = 'X'
+      subject.should_not be_empty
+    end
+
     it 'should return empty cell even it outside of scope' do
       subject[:bla_bla_bla].should be_empty
     end
