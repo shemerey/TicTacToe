@@ -205,14 +205,8 @@ class TicTacToe
       @signs ||= rand() > 0.5 ? %w[X O] : %w[O X]
     end
 
-
     def board
-      #the tic tac toe slots
-      @board ||= Board[
-        a1: " ", a2:" ",a3:" ",
-        b1: " ", b2:" ",b3:" ",
-        c1: " ", c2:" ",c3:" ",
-      ]
+      @board ||= Board.new
     end
 
     def winning_sequence
