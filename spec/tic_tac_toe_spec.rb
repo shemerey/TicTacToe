@@ -31,6 +31,18 @@ describe TicTacToe do
       capture{ subject }.should =~ /Game Over -- DRAW!/
     end
   end
+
+  describe 'Error handling' do
+    context "you can't go to the same cell twice" do
+      let(:input) { UserInput.new(%w[Anton a1 a1]) }
+      it { capture{ subject }.should =~ /You must choose an empty slot/ }
+    end
+
+    context "correct input could be column [a,b,c] line [1,2,3]" do
+      let(:input) { UserInput.new(%w[Anton aa xx nn 11 12 99 a10 b20]) }
+      it { capture{ subject }.should =~ /Please specify a move with the format 'A1' , 'B3' , 'C2' etc./ }
+    end
+  end
 end
 
 describe TicTacToe::User do
