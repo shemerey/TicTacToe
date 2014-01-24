@@ -1,6 +1,12 @@
 # coding: utf-8
 
-TicTacToe::User = Struct.new(:name, :sign, :score, :board) do
+class TicTacToe::User
+  attr_accessor :name, :sign, :score, :board
+
+  def initialize(name, sign, board)
+    @name, @sign, @board = name, sign, board
+  end
+
   def score
     @score ||= 0
   end
@@ -41,6 +47,7 @@ TicTacToe::User = Struct.new(:name, :sign, :score, :board) do
   end
 
   private
+
     def empty_in_column arr
       arr.each do |i|
         if board[i].empty?
@@ -65,5 +72,4 @@ TicTacToe::User = Struct.new(:name, :sign, :score, :board) do
       end
       times
     end
-
 end

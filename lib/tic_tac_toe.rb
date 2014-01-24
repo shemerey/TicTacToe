@@ -16,7 +16,7 @@ class TicTacToe
 
     greeting
 
-    @user_object, @cpu_object = User.new(gets.chomp, signs.last, 0, board), User.new('Ruby', signs.first, 0, board)
+    @user_object, @cpu_object = User.new(gets.chomp, signs.last, board), User.new('Ruby', signs.first, board)
 
     put_bar
     start_game(user_object.sign == 'X')
