@@ -18,20 +18,29 @@ class TicTacToe
 
     @user_object, @cpu_object = User.new(gets.chomp, signs.last, board), User.new('Ruby', signs.first, board)
 
+    @users = [
+       @user_object,
+       @cpu_object
+    ]
+
     put_bar
-    start_game(user_object.sign == 'X')
+    start_game
   end
 
-  def start_game(user_goes_first)
-    if user_goes_first
+  def players
+    @users.shuffle.circle.each
+  end
+
+  def start_game
+    if user_object.sign == 'X'
       user_turn
     else
       cpu_turn
     end
   end
 
-  def restart_game(user_goes_first)
-    clean && start_game(user_goes_first)
+  def restart_game
+    clean && start_game
   end
 
   def cpu_turn
@@ -99,19 +108,19 @@ class TicTacToe
   end
 
   def finish(message)
-    message && ask_to_play_again(rand() > 0.5)
+    message && ask_to_play_again
   end
 
-  def ask_to_play_again(user_goes_first)
+  def ask_to_play_again
     print " Play again? (Yn): "
     STDOUT.flush
     response = gets.chomp.downcase
     case response
-    when "y"   then restart_game(user_goes_first)
-    when "yes" then restart_game(user_goes_first)
+    when "y"   then restart_game
+    when "yes" then restart_game
     when "n"   then #do nothing
     when "no"  then #do nothing
-    else ask_to_play_again(user_goes_first)
+    else ask_to_play_again
     end
   end
 
