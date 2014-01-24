@@ -45,6 +45,30 @@ describe TicTacToe::Board do
     it 'should not be game over by default' do
       subject.should_not be_game_over
     end
+
+    %w[1 2 3].each do |line|
+      it 'was game over if someone won' do
+        subject[:"a#{line}"], subject[:"b#{line}"], subject[:"c#{line}"] = 'X', 'X', 'X'
+        subject.should be_game_over
+      end
+    end
+
+    %w[a b c].each do |col|
+      it 'was game over if someone won' do
+        subject[:"#{col}1"], subject[:"#{col}2"], subject[:"#{col}3"] = 'X', 'X', 'X'
+        subject.should be_game_over
+      end
+    end
+
+    it 'was game over if someone won' do
+      subject[:a1], subject[:b2], subject[:c3] = 'X', 'X', 'X'
+      subject.should be_game_over
+    end
+
+    it 'was game over if someone won' do
+      subject[:c1], subject[:b2], subject[:a3] = 'X', 'X', 'X'
+      subject.should be_game_over
+    end
   end
 
   context '#full?' do
