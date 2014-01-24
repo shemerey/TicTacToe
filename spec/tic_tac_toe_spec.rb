@@ -60,7 +60,7 @@ describe TicTacToe::User do
   end
 end
 
-describe TicTacToe::User::Input do
+describe TicTacToe::UserInput do
   it { should respond_to(:turn?, :exit?) }
 
   it 'expty input should not be turn' do

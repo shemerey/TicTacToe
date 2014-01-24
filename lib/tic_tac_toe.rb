@@ -1,34 +1,15 @@
+# coding: utf-8
+
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+class TicTacToe; end
+
 require "color_text"
+require 'tic_tac_toe/all'
 
 class TicTacToe
   attr_reader :cpu_object, :user_object
-
-  User = Struct.new(:name, :sign, :score) do
-    def score
-      @score ||= 0
-    end
-  end
-
-  class Board < Hash
-
-    def height
-      3
-    end
-
-    def width
-      3
-    end
-
-    def draw
-      puts "     a   b   c".gray
-      puts ""
-      puts " 1   #{self[:a1].green} | #{self[:b1].green} | #{self[:c1].green} ".gray
-      puts "    --- --- ---"
-      puts " 2   #{self[:a2].green} | #{self[:b2].green} | #{self[:c2].green} ".gray
-      puts "    --- --- ---"
-      puts " 3   #{self[:a3].green} | #{self[:b3].green} | #{self[:c3].green} ".gray
-    end
-  end
 
   def initialize
     greeting
@@ -114,27 +95,6 @@ class TicTacToe
       if board[i] == " "
         return i
       end
-    end
-  end
-
-  class User::Input
-    attr_reader :command, :column, :line
-
-    def initialize(input = '')
-      @command = input.chomp.downcase
-      @column, @line = command.split("")
-    end
-
-    def valid?
-      turn? || exit?
-    end
-
-    def turn?
-      ['a','b','c'].include?(column) && ['1','2','3'].include?(line)
-    end
-
-    def exit?
-      :exit == command.to_sym
     end
   end
 
