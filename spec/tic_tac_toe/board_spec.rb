@@ -41,9 +41,9 @@ describe TicTacToe::Board do
     end
   end
 
-  context 'Win' do
-    xit 'should win if line filled with same sign' do
-
+  context '#game_over?' do
+    it 'should not be game over by default' do
+      subject.should_not be_game_over
     end
   end
 

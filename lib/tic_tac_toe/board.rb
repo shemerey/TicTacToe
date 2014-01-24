@@ -50,6 +50,17 @@ class TicTacToe::Board
     ]
   end
 
+  def game_over?
+    return true if full?
+
+    wining_sequence.each do |column|
+      return true if times_in_column(column, 'X') == 3 # see if X has won
+      return true if times_in_column(column, 'O') == 3 # see if O has won
+    end
+
+    false
+  end
+
   def draw
     puts "     a   b   c".gray
     puts ""
@@ -59,4 +70,19 @@ class TicTacToe::Board
     puts "    --- --- ---"
     puts " 3   #{@board[:a3].green} | #{@board[:b3].green} | #{@board[:c3].green} ".gray
   end
+
+  private
+
+    def times_in_column arr, item
+      times = 0
+      arr.each do |i|
+        times += 1 if @board[i] == item
+        unless @board[i] == item || @board[i].empty?
+          #oppisite piece is in column so column cannot be used for win.
+          #therefore, the strategic thing to do is choose a dif column so return 0.
+          return 0
+        end
+      end
+      times
+    end
 end
