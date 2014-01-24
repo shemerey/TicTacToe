@@ -9,9 +9,11 @@ require "color_text"
 require 'tic_tac_toe/all'
 
 class TicTacToe
-  attr_reader :cpu_object, :user_object
+  attr_reader :cpu_object, :user_object, :board
 
   def initialize
+    @board = Board.new
+
     greeting
 
     @user_object, @cpu_object = User.new(gets.chomp, signs.last), User.new('Ruby', signs.first)
@@ -203,10 +205,6 @@ class TicTacToe
 
     def signs
       @signs ||= rand() > 0.5 ? %w[X O] : %w[O X]
-    end
-
-    def board
-      @board ||= Board.new
     end
 
     def winning_sequence
