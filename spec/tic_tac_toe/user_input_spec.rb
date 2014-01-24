@@ -49,10 +49,14 @@ describe TicTacToe::UserInput do
 
   context '#turn' do
     it 'should return 2 chars if command is a valid turn' do
-      described_class.new('a1').turn.should == 'a1'
-      described_class.new('  a1').turn.should == 'a1'
-      described_class.new('  a1   ').turn.should == 'a1'
-      described_class.new('a1   ').turn.should == 'a1'
+      described_class.new('a1').turn.should == :a1
+      described_class.new('  a1').turn.should == :a1
+      described_class.new('  a1   ').turn.should == :a1
+      described_class.new('a1   ').turn.should == :a1
+    end
+
+    it 'should not return string' do
+      described_class.new('  a1   ').turn.should_not == 'a1'
     end
 
     it 'should raise argument error if command is not valid' do

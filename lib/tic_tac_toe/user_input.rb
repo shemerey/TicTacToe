@@ -18,7 +18,7 @@ class TicTacToe::UserInput
 
   def turn
     raise ArgumentError unless valid?
-    @command
+    @command.to_sym
   end
 
   def exit?
