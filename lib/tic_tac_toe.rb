@@ -19,13 +19,7 @@ class TicTacToe
       3
     end
 
-    def draw(alice, bob)
-      puts ""
-      puts " Wins: #{alice.name}:#{alice.score} #{bob.name}:#{bob.score}".gray
-      puts ""
-      puts " #{alice.name}: #{alice.sign.green}"
-      puts " #{bob.name}: #{bob.sign.green}"
-      puts ""
+    def draw
       puts "     a   b   c".gray
       puts ""
       puts " 1   #{self[:a1].green} | #{self[:b1].green} | #{self[:c1].green} ".gray
@@ -278,7 +272,13 @@ class TicTacToe
     end
 
     def draw_game
-      board.draw(user_object, cpu_object)
+      puts ""
+      puts " Wins: #{user_object.name}:#{user_object.score} #{cpu_object.name}:#{cpu_object.score}".gray
+      puts ""
+      puts " #{user_object.name}: #{user_object.sign.green}"
+      puts " #{cpu_object.name}: #{cpu_object.sign.green}"
+      puts ""
+      board.draw
     end
 end
 
