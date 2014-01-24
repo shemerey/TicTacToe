@@ -47,7 +47,7 @@ class TicTacToe
 
     # see if cpu can win
     #see if any winning_sequence already have 2 (cpu)
-    winning_sequence.each do |column|
+    board.wining_sequence.each do |column|
       if times_in_column(column, cpu_object.sign) == 2
         return empty_in_column column
       end
@@ -55,14 +55,14 @@ class TicTacToe
 
     # see if user can win
     #see if any winning_sequence already have 2 (user)
-    winning_sequence.each do |column|
+    board.wining_sequence.each do |column|
       if times_in_column(column, user_object.sign) == 2
         return empty_in_column column
       end
     end
 
     #see if any winning_sequence aready have 1 (cpu)
-    winning_sequence.each do |column|
+    board.wining_sequence.each do |column|
       if times_in_column(column, cpu_object.sign) == 1
         return empty_in_column column
       end
@@ -140,7 +140,7 @@ class TicTacToe
 
     game_over = nil
 
-    winning_sequence.each do |column|
+    board.wining_sequence.each do |column|
       # see if cpu has won
       if times_in_column(column, cpu_object.sign) == 3
         put_line
@@ -200,21 +200,6 @@ class TicTacToe
 
     def signs
       @signs ||= rand() > 0.5 ? %w[X O] : %w[O X]
-    end
-
-    def winning_sequence
-      @winning_sequence ||= [
-        [:a1,:a2,:a3],
-        [:b1,:b2,:b3],
-        [:c1,:c2,:c3],
-
-        [:a1,:b1,:c1],
-        [:a2,:b2,:c2],
-        [:a3,:b3,:c3],
-
-        [:a1,:b2,:c3],
-        [:c1,:b2,:a3]
-      ]
     end
 
     def greeting

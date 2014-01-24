@@ -41,6 +41,12 @@ describe TicTacToe::Board do
     end
   end
 
+  context 'Win' do
+    xit 'should win if line filled with same sign' do
+
+    end
+  end
+
   context 'default cell should be empty' do
     it '#empty?' do
       subject[:b2].should be_empty
