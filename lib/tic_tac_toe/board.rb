@@ -51,14 +51,13 @@ class TicTacToe::Board
   end
 
   def game_over?
-    return true if full?
+    full? || signs.any?{|sign| sign_win?(sign) }
+  end
 
-    wining_sequence.each do |column|
-      return true if times_in_column(column, 'X') == 3 # see if X has won
-      return true if times_in_column(column, 'O') == 3 # see if O has won
+  def sign_win?(sign)
+    wining_sequence.any? do |column|
+      times_in_column(column, sign) == 3
     end
-
-    false
   end
 
   def draw
@@ -72,6 +71,10 @@ class TicTacToe::Board
   end
 
   private
+
+    def signs
+      values.delete_if(&:empty?).uniq
+    end
 
     def times_in_column arr, item
       times = 0
