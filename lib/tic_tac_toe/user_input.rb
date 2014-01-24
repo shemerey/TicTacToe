@@ -4,7 +4,7 @@ class TicTacToe::UserInput
   attr_reader :command, :column, :line
 
   def initialize(input = '')
-    @command = input.chomp.downcase
+    @command = input.strip.chomp.downcase
     @column, @line = command.split("")
   end
 
@@ -14,6 +14,11 @@ class TicTacToe::UserInput
 
   def turn?
     ['a','b','c'].include?(column) && ['1','2','3'].include?(line)
+  end
+
+  def turn
+    raise ArgumentError unless valid?
+    @command
   end
 
   def exit?

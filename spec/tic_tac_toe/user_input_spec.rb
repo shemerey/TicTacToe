@@ -47,6 +47,21 @@ describe TicTacToe::UserInput do
     end
   end
 
+  context '#turn' do
+    it 'should return 2 chars if command is a valid turn' do
+      described_class.new('a1').turn.should == 'a1'
+      described_class.new('  a1').turn.should == 'a1'
+      described_class.new('  a1   ').turn.should == 'a1'
+      described_class.new('a1   ').turn.should == 'a1'
+    end
+
+    it 'should raise argument error if command is not valid' do
+      expect{
+        described_class.new('!!!!').turn
+      }.to raise_error(ArgumentError)
+    end
+  end
+
   context '#exit?' do
     subject { described_class.new('exit') }
     it '#exit?' do
