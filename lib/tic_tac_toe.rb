@@ -40,6 +40,11 @@ class TicTacToe
     board[move] = cpu_object.sign
     put_line
     puts " #{cpu_object.name} marks #{move.to_s.upcase.green}".neon
+    if board.sign_win?(cpu_object.sign)
+      draw_game
+      cpu_object.score += 1
+      finish(win_message(cpu_object))
+    end
     check_game(user_object.sign)
   end
 
@@ -67,6 +72,11 @@ class TicTacToe
       board[user_input.turn] = user_object.sign
       put_line
       puts " #{user_object.name} marks #{user_input.turn.to_s.upcase.green}".neon
+      if board.sign_win?(user_object.sign)
+        draw_game
+        user_object.score += 1
+        finish(win_message(user_object))
+      end
       check_game(cpu_object.sign)
     end
   end
@@ -84,18 +94,6 @@ class TicTacToe
   end
 
   def check_game(next_turn)
-    if board.sign_win?(cpu_object.sign)
-      draw_game
-      cpu_object.score += 1
-      finish(win_message(cpu_object))
-    end
-
-    if board.sign_win?(user_object.sign)
-      draw_game
-      user_object.score += 1
-      finish(win_message(user_object))
-    end
-
     unless board.game_over?
       if(next_turn == user_object.sign)
         user_turn
