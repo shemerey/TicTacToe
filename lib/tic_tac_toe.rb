@@ -45,7 +45,7 @@ class TicTacToe
       cpu_object.score += 1
       finish(win_message(cpu_object))
     end
-    check_game(user_object)
+    play(user_object)
   end
 
   def turn(user)
@@ -77,7 +77,7 @@ class TicTacToe
         user_object.score += 1
         finish(win_message(user_object))
       end
-      check_game(cpu_object)
+      play(cpu_object)
     end
   end
 
@@ -93,7 +93,7 @@ class TicTacToe
     user_turn
   end
 
-  def check_game(user)
+  def play(user)
     turn(user) unless board.game_over?
     finish(draw_message) if board.game_draw?
   end
