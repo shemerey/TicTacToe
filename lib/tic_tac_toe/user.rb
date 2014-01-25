@@ -3,8 +3,8 @@
 class TicTacToe::User
   attr_accessor :name, :sign, :score, :board
 
-  def initialize(name, sign, board)
-    @name, @sign, @board = name, sign, board
+  def initialize(name, sign, game)
+    @name, @sign, @game = name, sign, game
   end
 
   def score
@@ -13,6 +13,10 @@ class TicTacToe::User
 
   def human?
     true
+  end
+
+  def board
+    @board ||= @game.board
   end
 
   private
