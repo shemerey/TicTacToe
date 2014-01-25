@@ -36,10 +36,9 @@ class TicTacToe::User
     end
 
     #no strategic spot found so just find a random empty
-    k = board.keys;
-    i = rand(k.length)
-    if board[k[i]].empty?
-      return k[i]
+    k = board.keys.sample;
+    if board[board.keys.sample].empty?
+      return k
     else
       #random selection is taken so just find the first empty slot
       board.each { |k,v| return k if v.empty? }

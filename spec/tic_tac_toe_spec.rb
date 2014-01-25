@@ -12,7 +12,7 @@ describe TicTacToe do
   end
 
   context 'Bad Game' do
-    let(:input) { UserInput.new(%w[Anton a1 b1 a2 n]) }
+    let(:input) { UserInput.new(%w[Anton a1 b1 a3 b3]) }
     it 'shoud be lose' do
       capture{ subject }.should =~ /Game Over -- Ruby WINS!!!/
     end

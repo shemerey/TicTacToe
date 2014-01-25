@@ -16,7 +16,7 @@ class TicTacToe
 
     greeting
 
-    @user_object, @cpu_object = User.new(gets.chomp, signs.last, board), User.new('Ruby', signs.first, board)
+    @user_object, @cpu_object = User.new(gets.chomp, 'X', board), User.new('Ruby', 'O', board)
 
     @users = [
        @user_object,
@@ -24,23 +24,15 @@ class TicTacToe
     ]
 
     put_bar
-    start_game
+    user_turn
   end
 
   def players
     @users.shuffle.circle.each
   end
 
-  def start_game
-    if user_object.sign == 'X'
-      user_turn
-    else
-      cpu_turn
-    end
-  end
-
   def restart_game
-    clean && start_game
+    clean && user_turn
   end
 
   def cpu_turn
@@ -128,10 +120,6 @@ class TicTacToe
       when "no"  then false
       else paly_again?
       end
-    end
-
-    def signs
-      @signs ||= rand() > 0.5 ? %w[X O] : %w[O X]
     end
 
     def greeting

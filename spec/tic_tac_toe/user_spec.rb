@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe TicTacToe::User do
+  before { srand(123456) }
   subject { described_class.new('Anton', 'X', double) }
 
   it { should respond_to(:sign, :sign=) }
