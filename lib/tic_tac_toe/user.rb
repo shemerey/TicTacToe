@@ -20,8 +20,30 @@ class TicTacToe::User
   end
 
   def turn
-    @game.user_turn
+    @game.put_line
+    puts "\n  RUBY TIC TAC TOE".purple
+    @game.draw_game
+    print "\n #{name}, please make a move or type 'exit' to quit: ".neon
+    STDOUT.flush
+
+    return @game.wrong_input unless (user_input = TicTacToe::UserInput.new(gets.chomp.downcase)).valid?
+
+    @game.put_bar
+
+    if user_input.turn?
+      return @game.wrong_move unless board[user_input.turn].empty?
+      board[user_input.turn] = sign
+      @game.put_line
+      puts " #{name} marks #{user_input.turn.to_s.upcase.green}".neon
+      if board.sign_win?(sign)
+        @game.draw_game
+        self.score += 1
+        @game.finish(@game.win_message(self))
+      end
+      @game.play(@game.cpu_object)
+    end
   end
+
 
   private
 

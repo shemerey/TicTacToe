@@ -5,6 +5,7 @@ describe TicTacToe do
   before do
     srand(123456) # seed random and fix AI
     TicTacToe.any_instance.stub(:gets).and_return(input)
+    TicTacToe::User.any_instance.stub(:gets).and_return(input)
   end
 
   it 'should ask about your name' do

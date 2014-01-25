@@ -35,31 +35,6 @@ class TicTacToe
     clean && user_object.turn
   end
 
-  def user_turn
-    put_line
-    puts "\n  RUBY TIC TAC TOE".purple
-    draw_game
-    print "\n #{user_object.name}, please make a move or type 'exit' to quit: ".neon
-    STDOUT.flush
-
-    return wrong_input unless (user_input = UserInput.new(gets.chomp.downcase)).valid?
-
-    put_bar
-
-    if user_input.turn?
-      return wrong_move unless board[user_input.turn].empty?
-      board[user_input.turn] = user_object.sign
-      put_line
-      puts " #{user_object.name} marks #{user_input.turn.to_s.upcase.green}".neon
-      if board.sign_win?(user_object.sign)
-        draw_game
-        user_object.score += 1
-        finish(win_message(user_object))
-      end
-      play(cpu_object)
-    end
-  end
-
   def wrong_input
     put_line
     puts " Please specify a move with the format 'A1' , 'B3' , 'C2' etc.".red
@@ -109,40 +84,37 @@ class TicTacToe
     message && ask_to_play_again
   end
 
-  private
+  def put_bar
+    puts ("#" * 80).gray
+    puts ("#" * 80).gray
+  end
 
-    def ask_to_play_again
-      restart_game if paly_again?
+  def clean
+    (1...20).each { |i| put_line }
+  end
+
+  def ask_to_play_again
+    restart_game if paly_again?
+  end
+
+  def paly_again?
+    print " Play again? (Yn): "
+    STDOUT.flush
+    case gets.chomp.downcase
+    when "y"   then true
+    when "yes" then true
+    when "n"   then false
+    when "no"  then false
+    else paly_again?
     end
+  end
 
-    def paly_again?
-      print " Play again? (Yn): "
-      STDOUT.flush
-      case gets.chomp.downcase
-      when "y"   then true
-      when "yes" then true
-      when "n"   then false
-      when "no"  then false
-      else paly_again?
-      end
-    end
-
-    def greeting
-      put_line
-      puts "\n  RUBY TIC TAC TOE".purple
-      print "\n What is your name? ".neon
-      STDOUT.flush
-    end
-
-
-    def put_bar
-      puts ("#" * 80).gray
-      puts ("#" * 80).gray
-    end
-
-    def clean
-      (1...20).each { |i| put_line }
-    end
+  def greeting
+    put_line
+    puts "\n  RUBY TIC TAC TOE".purple
+    print "\n What is your name? ".neon
+    STDOUT.flush
+  end
 end
 
   if __FILE__ == $PROGRAM_NAME
