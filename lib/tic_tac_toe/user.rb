@@ -45,6 +45,10 @@ class TicTacToe::User
     end
   end
 
+  def human?
+    name != 'Ruby'
+  end
+
   private
 
     def empty_in_column arr

@@ -11,4 +11,12 @@ describe TicTacToe::User do
   it 'should have zero socre by default' do
     subject.score.should be_zero
   end
+
+  describe '#human?' do
+    it{ subject.should be_human }
+    it 'should not be human if user name Ruby' do
+      subject.stub(:name).and_return('Ruby')
+      subject.should_not be_human
+    end
+  end
 end

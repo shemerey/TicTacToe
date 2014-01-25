@@ -43,6 +43,14 @@ class TicTacToe
     check_game(user_object.sign)
   end
 
+  def turn(user)
+    if user.human?
+      user_turn
+    else
+      cpu_turn
+    end
+  end
+
   def user_turn
     put_line
     puts "\n  RUBY TIC TAC TOE".purple
