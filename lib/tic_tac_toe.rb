@@ -16,7 +16,7 @@ class TicTacToe
 
     greeting
 
-    @user_object, @cpu_object = User.new(gets.chomp, 'X', board), User.new('Ruby', 'O', board)
+    @user_object, @cpu_object = User.new(gets.chomp, 'X', board), Ai.new('Ruby', 'O', board)
 
     @users = [
        @user_object,
