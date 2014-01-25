@@ -11,42 +11,8 @@ class TicTacToe::User
     @score ||= 0
   end
 
-  def find_move
-    # see if cpu can win
-    #see if any winning_sequence already have 2 (cpu)
-    board.wining_sequence.each do |column|
-      if times_in_column(column, sign) == 2
-        return empty_in_column column
-      end
-    end
-
-    # see if user can win
-    #see if any winning_sequence already have 2 (user)
-    board.wining_sequence.each do |column|
-      if times_in_column(column, opposite_sign) == 2
-        return empty_in_column column
-      end
-    end
-
-    #see if any winning_sequence aready have 1 (cpu)
-    board.wining_sequence.each do |column|
-      if times_in_column(column, sign) == 1
-        return empty_in_column column
-      end
-    end
-
-    #no strategic spot found so just find a random empty
-    k = board.keys.sample;
-    if board[board.keys.sample].empty?
-      return k
-    else
-      #random selection is taken so just find the first empty slot
-      board.each { |k,v| return k if v.empty? }
-    end
-  end
-
   def human?
-    name != 'Ruby'
+    true
   end
 
   private

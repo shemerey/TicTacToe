@@ -14,10 +14,6 @@ describe TicTacToe::Ai do
   end
 
   describe '#human?' do
-    it{ subject.should be_human }
-    it 'should not be human if user name Ruby' do
-      subject.stub(:name).and_return('Ruby')
-      subject.should_not be_human
-    end
+    it{ subject.should_not be_human }
   end
 end

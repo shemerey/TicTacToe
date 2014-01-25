@@ -1,14 +1,9 @@
 # coding: utf-8
 
-class TicTacToe::Ai
-  attr_accessor :name, :sign, :score, :board
+class TicTacToe::Ai < TicTacToe::User
 
-  def initialize(name, sign, board)
-    @name, @sign, @board = name, sign, board
-  end
-
-  def score
-    @score ||= 0
+  def human?
+    false
   end
 
   def find_move
@@ -43,10 +38,6 @@ class TicTacToe::Ai
       #random selection is taken so just find the first empty slot
       board.each { |k,v| return k if v.empty? }
     end
-  end
-
-  def human?
-    name != 'Ruby'
   end
 
   private
