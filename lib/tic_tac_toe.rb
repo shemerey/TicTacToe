@@ -24,7 +24,7 @@ class TicTacToe
     ]
 
     put_bar
-    user_turn
+    user_object.turn
   end
 
   def players
@@ -32,7 +32,7 @@ class TicTacToe
   end
 
   def restart_game
-    clean && user_turn
+    clean && user_object.turn
   end
 
   def cpu_turn
@@ -46,14 +46,6 @@ class TicTacToe
       finish(win_message(cpu_object))
     end
     play(user_object)
-  end
-
-  def turn(user)
-    if user.human?
-      user_turn
-    else
-      cpu_turn
-    end
   end
 
   def user_turn
@@ -84,17 +76,17 @@ class TicTacToe
   def wrong_input
     put_line
     puts " Please specify a move with the format 'A1' , 'B3' , 'C2' etc.".red
-    user_turn
+    user_object.turn
   end
 
   def wrong_move
     put_line
     puts " You must choose an empty slot".red
-    user_turn
+    user_object.turn
   end
 
   def play(user)
-    turn(user) unless board.game_over?
+    user.turn unless board.game_over?
     finish(draw_message) if board.game_draw?
   end
 
