@@ -19,6 +19,10 @@ class TicTacToe::User
     @board ||= @game.board
   end
 
+  def turn
+    @game.user_turn
+  end
+
   private
 
     def empty_in_column arr

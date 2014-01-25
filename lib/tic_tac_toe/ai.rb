@@ -6,6 +6,10 @@ class TicTacToe::Ai < TicTacToe::User
     false
   end
 
+  def turn
+    @game.cpu_turn
+  end
+
   def find_move
     # see if cpu can win
     #see if any winning_sequence already have 2 (cpu)
