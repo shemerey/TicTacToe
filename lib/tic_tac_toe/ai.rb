@@ -7,8 +7,18 @@ class TicTacToe::Ai < TicTacToe::User
   end
 
   def turn
-    @game.cpu_turn
+    move = find_move
+    board[move] = sign
+    @game.put_line
+    puts " #{name} marks #{move.to_s.upcase.green}".neon
+    if board.sign_win?(sign)
+      @game.draw_game
+      self.score += 1
+      @game.finish(@game.win_message(self))
+    end
+    @game.play(@game.user_object)
   end
+
 
   def find_move
     # see if cpu can win

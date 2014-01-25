@@ -35,19 +35,6 @@ class TicTacToe
     clean && user_object.turn
   end
 
-  def cpu_turn
-    move = cpu_object.find_move
-    board[move] = cpu_object.sign
-    put_line
-    puts " #{cpu_object.name} marks #{move.to_s.upcase.green}".neon
-    if board.sign_win?(cpu_object.sign)
-      draw_game
-      cpu_object.score += 1
-      finish(win_message(cpu_object))
-    end
-    play(user_object)
-  end
-
   def user_turn
     put_line
     puts "\n  RUBY TIC TAC TOE".purple
@@ -90,12 +77,39 @@ class TicTacToe
     finish(draw_message) if board.game_draw?
   end
 
+  def put_line
+    puts ("-" * 80).gray
+  end
+
+  def draw_game
+    put_line
+    puts ""
+    puts " Wins: #{user_object.name}:#{user_object.score} #{cpu_object.name}:#{cpu_object.score}".gray
+    puts ""
+    puts " #{user_object.name}: #{user_object.sign.green}"
+    puts " #{cpu_object.name}: #{cpu_object.sign.green}"
+    puts ""
+    board.draw
+  end
+
+  def draw_message
+    draw_game
+    put_line
+    puts ""
+    puts " Game Over -- DRAW!\n".blue
+  end
+
+  def win_message(user)
+    put_line
+    puts ""
+    puts " Game Over -- #{user.name} WINS!!!\n".blue
+  end
+
+  def finish(message)
+    message && ask_to_play_again
+  end
 
   private
-
-    def finish(message)
-      message && ask_to_play_again
-    end
 
     def ask_to_play_again
       restart_game if paly_again?
@@ -120,9 +134,6 @@ class TicTacToe
       STDOUT.flush
     end
 
-    def put_line
-      puts ("-" * 80).gray
-    end
 
     def put_bar
       puts ("#" * 80).gray
@@ -131,30 +142,6 @@ class TicTacToe
 
     def clean
       (1...20).each { |i| put_line }
-    end
-
-    def draw_message
-      draw_game
-      put_line
-      puts ""
-      puts " Game Over -- DRAW!\n".blue
-    end
-
-    def win_message(user)
-      put_line
-      puts ""
-      puts " Game Over -- #{user.name} WINS!!!\n".blue
-    end
-
-    def draw_game
-      put_line
-      puts ""
-      puts " Wins: #{user_object.name}:#{user_object.score} #{cpu_object.name}:#{cpu_object.score}".gray
-      puts ""
-      puts " #{user_object.name}: #{user_object.sign.green}"
-      puts " #{cpu_object.name}: #{cpu_object.sign.green}"
-      puts ""
-      board.draw
     end
 end
 
